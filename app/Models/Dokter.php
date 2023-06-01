@@ -12,7 +12,7 @@ class Dokter extends Model
         return [[
                     'nama' => 'Mahardian',
                     'spesialis' => 'THT',
-                    'telp' => '085862621512',
+                    'telp' => ' ',
                     'alamat' => 'Bogor'
                 ],
                 [
