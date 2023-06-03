@@ -7,14 +7,33 @@ use Illuminate\Http\Request;
 
 class PasienController extends Controller
 {
-    public function index(){
-       $pasiens = Pasien::getAll();
-        return view('admin.pasien.index', [
+    // menampilkan semua data pasien
+    public function index()
+    {
+       $pasiens = Pasien::all();
+        return view('admin.pasien.index',
+        [
             'pasiens' =>$pasiens,
         ]);
     }
-
-    public function create(){
+ 
+    public function create()
+    {
         return view('admin.pasien.create');
+    
+    }
+
+    //method untuk menyimpan data ke database
+    public function store(Request $request)
+    {
+        Pasien::create([
+            'nama' => $request->nama,
+            'jk' => $request->jk,
+            'tgl_lahir' =>$request->tgl_lahir,
+            'alamat'=>$request->alamat,
+            'telp'=>$request->telp,
+        ]);
+
+        return redirect('/pasien');
     }
 }

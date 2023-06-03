@@ -22,8 +22,9 @@ Route::get('/', [DashboardController::class, 'index']);
 
 Route::get ('/pasien',[PasienController::class,'index' ]);
 
-Route::post('/pasien/create', [PasienController::class, 'create']);
+Route::get('/pasien/create', [PasienController::class, 'create']);
 
+Route::post('/pasien',[PasienController::class, 'store']);
 //Route untuk menampilkan  daftar dokter
 Route::get ('/dokter',[DokterController::class, 'index']);
 
