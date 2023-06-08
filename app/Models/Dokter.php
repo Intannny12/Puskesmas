@@ -8,27 +8,10 @@ use Illuminate\Database\Eloquent\Model;
 class Dokter extends Model
 {
     use HasFactory;
-    public static function getAll(){
-        return [[
-                    'nama' => 'Mahardian',
-                    'spesialis' => 'THT',
-                    'telp' => ' ',
-                    'alamat' => 'Bogor'
-                ],
-                [
-                    'nama' => 'Faiza',
-                    'spesialis' => 'Organ Dalam',
-                    'telp' => '083826964224',
-                    'alamat' => 'Bandung',
-                    
-                ],
-                [
-                    'nama'=> 'Muhammad',
-                    'spesialis' => 'Kulit',
-                    'telp' => '085892681486',
-                    'alamat' => 'Cilebut'
-                    
-                ],
-        ];
-    }
+    // menghubungkan model dengan table dokter 
+    protected $table = 'dokters';
+
+    // mengdeklarasiakn kolom yang boleh diisi
+    protected $fillable = ['nama', 'spesialis', 'alamat', 'telp'];
+
 }
