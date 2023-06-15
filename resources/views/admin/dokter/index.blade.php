@@ -33,10 +33,11 @@
                     <td>{{$item['alamat']}}</td>
                     <td>{{$item['telp']}}</td>
                     <td>
-                        <a href="#" class="btn btn-warning btn-sm">Edit</a>
-                        <form action="#" method="POST" class="d-inline">
+                        <a href="/dokter/edit/{{ $item->id }}" class="btn btn-warning btn-sm">Edit</a>
+                        <form action="/dokter" method="POST" class="d-inline">
                             @csrf
                             @method('delete')
+                            <input type="hidden" name="id" value="{{ $item->id }}">
                             <button class="btn btn-danger btn-sm" onclick="return confirm('Apakah anda yakin ingin menghapus data ini?')">Hapus</button>
                         </form>
                     </td>

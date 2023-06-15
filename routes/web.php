@@ -42,3 +42,14 @@ Route::put('/pasien/{id}', [PasienController::class, 'update']);
 
 //Route untuk menghapus pasien
 Route::delete('/pasien', [PasienController::class, 'destroy']);
+
+
+//Route untuk menampilkan form edit dokter
+Route::get('/dokter/edit/{id}', [DokterController::class, 'edit']);
+
+//Route  untuk memproses update dokter
+Route::put('/dokter/{id}', [DokterController::class, 'update']);
+
+
+//Route untuk menghapus dokter
+Route::delete('/dokter', [DokterController::class, 'destroy']);
