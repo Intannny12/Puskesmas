@@ -17,43 +17,49 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', [DashboardController::class, 'index'])->middleware('auth');
+// Route grup untuk admin
+Route::group(['middleware' => ['auth', 'role:admin']], function(){
+    Route::get('/pasien/create', [PasienController::class, 'create']);
 
-//Route untuk menampilkan daftar pasien
+    Route::post('/pasien',[PasienController::class, 'store']);
+    Route::get('/dokter/create',[DokterController::class, 'create']);
 
-Route::get ('/pasien',[PasienController::class,'index' ])->middleware('auth');
-
-Route::get('/pasien/create', [PasienController::class, 'create'])->middleware('auth');
-
-Route::post('/pasien',[PasienController::class, 'store'])->middleware('auth');
-
-//Route untuk menampilkan  daftar dokter
-Route::get ('/dokter',[DokterController::class, 'index'])->middleware('auth');
-
-Route::get('/dokter/create',[DokterController::class, 'create'])->middleware('auth');
-
-Route::post('/dokter', [DokterController::class, 'store'])->middleware('auth');
+Route::post('/dokter', [DokterController::class, 'store']);
 
 //Route untuk menampilkan form edit pasien
-Route::get('/pasien/edit/{id}', [PasienController::class, 'edit'])->middleware('auth');
+Route::get('/pasien/edit/{id}', [PasienController::class, 'edit']);
 
 //Route  untuk memproses update pasien
-Route::put('/pasien/{id}', [PasienController::class, 'update'])->middleware('auth');
+Route::put('/pasien/{id}', [PasienController::class, 'update']);
 
 
 //Route untuk menghapus pasien
-Route::delete('/pasien', [PasienController::class, 'destroy'])->middleware('auth');
+Route::delete('/pasien', [PasienController::class, 'destroy']);
 
 
 //Route untuk menampilkan form edit dokter
-Route::get('/dokter/edit/{id}', [DokterController::class, 'edit'])->middleware('auth');
+Route::get('/dokter/edit/{id}', [DokterController::class, 'edit']);
 
 //Route  untuk memproses update dokter
-Route::put('/dokter/{id}', [DokterController::class, 'update'])->middleware('auth');
+Route::put('/dokter/{id}', [DokterController::class, 'update']);
 
 
 //Route untuk menghapus dokter
-Route::delete('/dokter', [DokterController::class, 'destroy'])->middleware('auth');
+Route::delete('/dokter', [DokterController::class, 'destroy']); 
+});
+
+// Route group untuk pengunjung yg sudah login
+Route::group(['middleware' => ['auth']], function(){
+    
+Route::get('/', [DashboardController::class, 'index']);
+
+//Route untuk menampilkan daftar pasien
+
+Route::get ('/pasien',[PasienController::class,'index' ]);
+
+//Route untuk menampilkan  daftar dokter
+Route::get ('/dokter',[DokterController::class,  'index']);
+});
 
 Auth::routes();
 
