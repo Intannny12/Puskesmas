@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Dokter;
 use App\Models\Pasien;
 use Illuminate\Http\Request;
 
@@ -19,7 +20,10 @@ class PasienController extends Controller
  
     public function create()
     {
-        return view('admin.pasien.create');
+        $dokters = Dokter::all();
+        return view('admin.pasien.create', [
+            'dokters' => $dokters
+        ]);
     
     }
 
@@ -33,6 +37,8 @@ class PasienController extends Controller
             'tgl_lahir' => 'required|date',
             'alamat' => 'required',
             'telp' => 'required|numeric',
+            'dokter_id' => 'required'
+
 
         ]);
 
@@ -43,6 +49,7 @@ class PasienController extends Controller
             'tgl_lahir' => $request->tgl_lahir,
             'alamat' => $request->alamat,
             'telp' => $request->telp,
+            'dokter_id' => $request->dokter_id,
         ]);
 
         return redirect('/pasien');
@@ -81,6 +88,7 @@ class PasienController extends Controller
             'tgl_lahir' => $request->tgl_lahir,
             'alamat' => $request->alamat,
             'telp' => $request->telp,
+            'dokter_id' => $request->dokter_id,
         ]);
 
         return redirect('/pasien')->with('success', 'Data pasien berhasil diubah.');
